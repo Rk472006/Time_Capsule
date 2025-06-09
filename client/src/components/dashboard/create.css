@@ -1,0 +1,97 @@
+.create-container {
+  max-width: 800px; /* or same max-width as Inbox/Sent */
+  width: 800px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 1.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.create-header {
+  font-size: 1.8rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: black;
+}
+
+/* Remove max-width and margin from form to make it fill container */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  
+  width: 100% ;  /* full width inside container */
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  color: #111; /* Dark text on white background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Inputs and buttons keep their styles */
+input[type="email"],
+input[type="datetime-local"],
+textarea {
+  background-color: white;
+  border: 1.5px solid #444;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: #111;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+}
+
+input[type="email"]:focus,
+input[type="datetime-local"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #646cff;
+  background-color: white;
+}
+
+textarea {
+  min-height: 120px;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+button {
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #535bf2;
+}
+
+button:disabled {
+  background-color: #9999ff;
+  cursor: not-allowed;
+}
+
+/* Responsive tweaks */
+@media (max-width: 500px) {
+  .create-container {
+    max-width: 95%;
+    padding: 1rem;
+  }
+  
+  button {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+}

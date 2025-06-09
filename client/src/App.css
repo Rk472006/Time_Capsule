@@ -1,0 +1,95 @@
+/* App.css */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f2f5; 
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dashboard-header-bar{
+ display: flex;
+ flex-direction: row;
+}
+.dashboard-welcome-message{
+    font-size: 3em;
+    margin: 0.5em 0.5em;
+    padding: 0px 100px 0px 0px;
+    line-height: 1.1;
+    width: 75%;
+}
+
+.dashboard-logout-button{
+  margin: 2rem 1rem ;
+}
+
+/* Container for login/signup */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+}
+
+.toggle-text {
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
+
+.toggle-button {
+  color: #2563eb;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 500;
+}
+
+/* Responsive tweaks */
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .app-container {
+    padding: 1rem;
+    max-width: 95%;
+    border-radius: 0.75rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .app-container {
+    max-width: 90%;
+  }
+}

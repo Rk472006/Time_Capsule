@@ -1,0 +1,61 @@
+/* dashboard.css */
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color:white;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  min-height: 80vh;
+}
+
+.dashboard-nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.dashboard-nav button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  flex-grow: 1;
+  max-width: 150px;
+  white-space: nowrap;
+}
+
+.dashboard-nav button:hover {
+  background-color: #d1d9ff;
+}
+
+.dashboard-nav button.active {
+  background-color: #646cff;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 0 8px #646cffaa;
+}
+
+.dashboard-content {
+  flex-grow: 1;
+  min-height: 60vh;
+  overflow-y: auto;
+  padding: 1rem;
+  border-top: 1px solid #eee;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .dashboard-nav button {
+    max-width: 100%;
+    flex-grow: unset;
+  }
+}
