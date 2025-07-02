@@ -42,7 +42,7 @@ export default function Sent() {
       if (isOpened !== "all") params.isOpened = isOpened;
 
       const res = await axios.get(
-        `http://localhost:5000/api/messages/sent/${uid}`,
+        `${import.meta.env.VITE_EXPRESS_API}/api/messages/sent/${uid}`,
         { params }
       );
       setMessages(res.data);
@@ -55,7 +55,7 @@ export default function Sent() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this message?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/messages/${id}`);
+      await axios.delete(`${import.meta.env.VITE_EXPRESS_API}/api/messages/${id}`);
       setReload((prev) => !prev);
     } catch (err) {
       toast.error("Failed to delete message.");
@@ -70,7 +70,7 @@ export default function Sent() {
 
   const handleSaveEdit = async (id) => {
     try {
-      await axios.patch(`http://localhost:5000/api/messages/update/${id}`, {
+      await axios.patch(`${import.meta.env.VITE_EXPRESS_API}/api/messages/update/${id}`, {
         content: editedContent,
       });
       setEditingId(null);

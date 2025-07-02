@@ -6,7 +6,7 @@ const emojis = ['❤️', '😮', '😂', '😢', '👍', '👎'];
 export default function ReactionInbox({ messageId, reactions = {}, currentUserUid, refresh }) {
   const handleReact = async (emoji) => {
     try {
-      await axios.post(`http://localhost:5000/api/messages/${messageId}/react`, {
+      await axios.post(`${import.meta.env.VITE_EXPRESS_API}/api/messages/${messageId}/react`, {
         emoji,
         userId: currentUserUid,
       });

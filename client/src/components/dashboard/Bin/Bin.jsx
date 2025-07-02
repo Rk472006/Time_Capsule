@@ -12,7 +12,7 @@ export default function Bin({  }) {
   const fetchMessages = async () => {
     try {
       
-      const res = await axios.get(`http://localhost:5000/api/messages/bin/${uid}`);
+      const res = await axios.get(`${import.meta.env.VITE_EXPRESS_API}/api/messages/bin/${uid}`);
       setMessages(res.data);
     } catch (err) {
       console.error("Error fetching bin messages:", err);
@@ -29,7 +29,7 @@ export default function Bin({  }) {
 
   const handleRestore = async (id) => {
     try {
-      await axios.patch(`http://localhost:5000/api/messages/restore/${id}`);
+      await axios.patch(`${import.meta.env.VITE_EXPRESS_API}/api/messages/restore/${id}`);
       setMessages((prev) => prev.filter(msg => msg._id !== id));
     } catch (err) {
       console.error("Restore failed:", err);
@@ -40,7 +40,7 @@ export default function Bin({  }) {
   const handlePermanentDelete = async (id) => {
     if (!window.confirm("Are you sure you want to permanently delete this message?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/messages/permanent/${id}`);
+      await axios.delete(`${import.meta.env.VITE_EXPRESS_API}/api/messages/permanent/${id}`);
       setMessages((prev) => prev.filter(msg => msg._id !== id));
     } catch (err) {
       console.error("Permanent delete failed:", err);

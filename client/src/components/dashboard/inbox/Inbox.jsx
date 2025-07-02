@@ -29,7 +29,7 @@ export default function Inbox() {
       if (filters.includeDeleted) params.append("includeDeleted", "true");
 
       const res = await axios.get(
-        `http://localhost:5000/api/messages/inbox/${uid}?${params}`
+        `${import.meta.env.VITE_EXPRESS_API}/api/messages/inbox/${uid}?${params}`
       );
       setMessages(res.data);
     } catch (err) {
@@ -52,7 +52,7 @@ export default function Inbox() {
 
   const handleViewMessage = async (id) => {
     try {
-      await axios.patch(`http://localhost:5000/api/messages/open/${id}`);
+      await axios.patch(`${import.meta.env.VITE_EXPRESS_API}/api/messages/open/${id}`);
       fetchMessages();
     } catch (error) {
       console.error("Failed to mark message as opened:", error);
@@ -62,7 +62,7 @@ export default function Inbox() {
 
   const handleSoftDelete = async (id) => {
     try {
-      await axios.patch(`http://localhost:5000/api/messages/inbox/delete/${id}`);
+      await axios.patch(`${import.meta.env.VITE_EXPRESS_API}/api/messages/inbox/delete/${id}`);
       fetchMessages();
     } catch (err) {
       console.error("Error during soft delete:", err);

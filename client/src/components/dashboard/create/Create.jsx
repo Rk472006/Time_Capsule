@@ -19,7 +19,7 @@ export default function Create() {
   const getUIDByEmail = async (email) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/user/getUIDByEmail",
+        `${import.meta.env.VITE_EXPRESS_API}/api/user/getUIDByEmail`,
         { email }
       );
       return response.data.uid;
@@ -46,7 +46,7 @@ export default function Create() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/messages/upload",
+        `${import.meta.env.VITE_EXPRESS_API}/api/messages/upload`,
         formData
       );
       console.log("Image uploaded successfully:", response.data.url);
@@ -66,7 +66,7 @@ export default function Create() {
 
       const uploadedImageUrl = await uploadImageToCloudinary();
 
-      await axios.post("http://localhost:5000/api/messages/create", {
+      await axios.post(`${import.meta.env.VITE_EXPRESS_API}/api/messages/create`, {
         from: uid,
         to: recipientUID,
         content,
