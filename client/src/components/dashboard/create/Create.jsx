@@ -74,7 +74,7 @@ export default function Create() {
         from: uid,
         to: recipientUID,
         content,
-        openAt: toISOStringWithOffset(openAt), ,
+        openAt: toISOStringWithOffset(openAt), 
         imageUrl: uploadedImageUrl,
       });
 
