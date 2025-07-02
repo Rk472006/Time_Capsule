@@ -10,7 +10,7 @@ export default function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const API=import.meta.env.VITE_EXPRESS_API;
   function isValidPassword(password) {
     const minLength = 6;
     const hasUpper = /[A-Z]/.test(password);
@@ -38,8 +38,8 @@ export default function Register() {
       );
 
       const firebaseUser = userCredential.user;
-
-      await axios.post(`${import.meta.env.VITE_EXPRESS_API}/api/user/register`, {
+      console.log(API);
+      await axios.post(`${API}/api/user/register`, {
         uid: firebaseUser.uid,
         email: firebaseUser.email,
       });
