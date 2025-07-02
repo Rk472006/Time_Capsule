@@ -15,6 +15,10 @@ export default function Create() {
   const [imagePreview, setImagePreview] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const fileInputRef = useRef(null);
+  const toISOStringWithOffset = (localDateTimeStr) => {
+  const local = new Date(localDateTimeStr);
+  return new Date(local.getTime() - local.getTimezoneOffset() * 60000).toISOString();
+};
 
   const getUIDByEmail = async (email) => {
     try {
@@ -70,7 +74,7 @@ export default function Create() {
         from: uid,
         to: recipientUID,
         content,
-        openAt,
+        openAt: toISOStringWithOffset(openAt), ,
         imageUrl: uploadedImageUrl,
       });
 
