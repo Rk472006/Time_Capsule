@@ -13,6 +13,7 @@ export default function ReactionInbox({ messageId, reactions = {}, currentUserUi
       refresh(); 
     } catch (err) {
       console.error("Reaction failed", err);
+      alert("Failed to react. Please try again.");
     }
   };
 

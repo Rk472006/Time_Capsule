@@ -1,62 +1,27 @@
-import React, { useState } from "react";
-import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
-import Dashboard from "./components/dashboard/Dashboard";
-import "./App.css";
-
-export default function App() {
-  const [isLoginView, setIsLoginView] = useState(true);
-  const [user, setUser] = useState(null);
-
-  const handleAuthSuccess = (userData) => {
-    setUser(userData);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-  };
-
-  if (user) {
-    return (
-      <div className="dashboard-wrapper">
-        <div className="dashboard-header-bar">
-          <h1 className="dashboard-welcome-message">🎉 Welcome, {user.email}</h1>
-          <button onClick={handleLogout} className="dashboard-logout-button">
-            Logout
-          </button>
-        </div>
-
-        
-
-        <Dashboard user={user} />
-      </div>
-    );
-  }
-
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';      
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import Inbox from './components/dashboard/inbox/Inbox';
+import Sent from './components/dashboard/sent/Sent';
+import Create from './components/dashboard/create/Create';
+import Bin from './components/dashboard/Bin/Bin';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+function App() {
   return (
-    <div className="app-container">
-      <h1 className="title">⏳ Time Capsule</h1>
-      <p className="subtitle">
-        Save messages for the future. Unlock them when the time is right.
-      </p>
-
-      <div className="auth-box">
-        {isLoginView ? (
-          <Login onLoginSuccess={handleAuthSuccess} />
-        ) : (
-          <Register onRegisterSuccess={handleAuthSuccess} />
-        )}
-
-        <p className="toggle-text">
-          {isLoginView ? "Don't have an account?" : "Already have an account?"}{" "}
-          <button
-            className="toggle-button"
-            onClick={() => setIsLoginView(!isLoginView)}
-          >
-            {isLoginView ? "Register" : "Login"}
-          </button>
-        </p>
-      </div>
-    </div>
+  
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/inbox/:uid" element={<ProtectedRoute><Inbox /></ProtectedRoute>} />
+        <Route path="/sent/:uid" element={<ProtectedRoute><Sent /></ProtectedRoute>} />
+        <Route path="/create/:uid" element={<ProtectedRoute><Create /></ProtectedRoute>} />
+        <Route path="/bin/:uid" element={<ProtectedRoute><Bin /></ProtectedRoute>} />
+      </Routes>
+  
   );
 }
+
+export default App;

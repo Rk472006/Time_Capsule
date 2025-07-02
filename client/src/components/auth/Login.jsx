@@ -1,73 +1,81 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
-import axios from "axios";
-import "./login.css"; // Import the CSS here
-
-export default function Login({ onLoginSuccess }) {
+import { auth } from "../../utils/firebase"; 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import "./Login.css"; 
+export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  function isValidPassword(password) {
+    const minLength = 6;
+    const hasUpper = /[A-Z]/.test(password);
+    const hasLower = /[a-z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const isLongEnough = password.length >= minLength;
+
+    return hasUpper && hasLower && hasDigit && hasSpecial && isLongEnough;
+  }
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    setError("");
-    if (!email || !password) {
-      setError("Please enter both email and password.");
-      return;
+    e.preventDefault(); 
+
+    if (!isValidPassword(password)) {
+        toast.error("Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+        navigate("/login");
+        return;
     }
-    setLoading(true);
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const firebaseUser = userCredential.user;
 
-      // Sync user with backend
-      await axios.post("http://localhost:5000/api/user/registerOrLogin", {
-        uid: firebaseUser.uid,
-        email: firebaseUser.email,
-      });
-
-      setError("Logged in and synced with database!");
-      setLoading(false);
-
-      if (onLoginSuccess) {
-        onLoginSuccess({ uid: firebaseUser.uid, email: firebaseUser.email });
-      }
+      toast.success("Logged in successfully!");
+      localStorage.setItem("uid", firebaseUser.uid);
+      navigate(`/inbox/${firebaseUser.uid}`, { replace: true });
     } catch (err) {
-      setError(err.message || "Something went wrong!");
-      setLoading(false);
+      console.error("Login failed:", err);
+      if (err.code === 'auth/user-not-found') {
+        toast.error("No user found with this email.");
+      } else if (err.code === 'auth/wrong-password') {
+        toast.error("Incorrect password.");
+      } else {
+        toast.error("Login failed. Please try again.");
+      }
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleLogin} noValidate>
+    <div className="login-page">
+    <div className="login-container">
+      <h2>Login</h2>
+      <form id="login" onSubmit={handleLogin}>
         <input
           type="email"
           placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
           value={email}
           required
-          autoComplete="email"
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
           value={password}
           required
-          autoComplete="current-password"
+          autoComplete="new-password"
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
-      {error && (
-        <p style={{ color: error.includes("Logged in") ? "#22c55e" : "#ef4444" }}>
-          {error}
+        <button type="submit">Submit</button>
+        <p>
+          Don't have an account? <a href="/register">Register</a>
         </p>
-      )}
+      </form>
+      <ToastContainer position="top-right" autoClose={3000} />
+      </div>
     </div>
   );
 }

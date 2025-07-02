@@ -30,7 +30,11 @@ const messageSchema = new mongoose.Schema({
     default: false,
   },
 
-  
+  imageUrl: {
+    type: String,
+    default: null,
+  },
+
   reactions: {
     type: Map,
     of: [String],

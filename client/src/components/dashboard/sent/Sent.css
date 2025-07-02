@@ -1,0 +1,249 @@
+/* Title */
+h3 {
+  text-align: center;
+  margin: 1.5rem 0;
+  font-size: 2rem;
+  color: #1f2937;
+}
+
+/* Layout Containers */
+.sent-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f9fafb;
+  min-height: 100vh;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sent-page {
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+/* Filters */
+.sent-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.sent-filters input[type="text"],
+.sent-filters input[type="date"],
+.sent-filters select {
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  min-width: 140px;
+}
+
+/* Message Card */
+.sent-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-left: 5px solid #007bff;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.sent-card.opened {
+  border-left-color: #22c55e;
+  background-color: #f0fdf4;
+}
+
+.sent-card.not-opened {
+  border-left-color: #facc15;
+  background-color: #fefce8;
+}
+
+.sent-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  cursor: default;
+}
+
+.sent-card p {
+  margin: 8px 0;
+}
+
+.sent-card textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 0.95rem;
+  resize: vertical;
+  margin-top: 5px;
+  background-color: #f9fafb;
+}
+
+/* Status Label */
+.status {
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.opened-text {
+  color: green;
+}
+
+.not-opened-text {
+  color: orange;
+}
+
+/* Buttons */
+.btn {
+  padding: 6px 12px;
+  margin: 8px 8px 0 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn.edit {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn.delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn.save {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn.cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn.view-image {
+  background-color: #10b981;
+  color: white;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.no-messages {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sent-page {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .sent-filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+/* Image Modal Popup */
+/* Image Modal Overlay */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 1rem;
+}
+
+/* Modal Content Box */
+.image-modal-content {
+  position: relative;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 0.5rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  max-width: 70vw;
+  max-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Modal Image */
+.image-modal-content img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Close Button */
+.image-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 2px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 1;
+}
+
+.modal-image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

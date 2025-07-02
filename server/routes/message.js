@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Message = require('../models/Message');
+const upload = require("../middleware/upload");
 
 
 router.post('/create', async (req, res) => {
-  const { from, to, content, openAt } = req.body;
+  const { from, to, content, openAt,imageUrl } = req.body;
 
   // Validate required fields
   if (!from || !to || !content || !openAt) {
@@ -17,6 +18,7 @@ router.post('/create', async (req, res) => {
       to,
       content,
       openTime: new Date(openAt), 
+       imageUrl: imageUrl || null,
     });
 
     await message.save();
@@ -343,7 +345,18 @@ router.post('/:id/react', async (req, res) => {
   await message.save();
   res.status(200).send("Reaction updated");
 });
+router.post("/upload", upload.single("file"), (req, res) => {
+  try {
+    if (!req.file || !req.file.path) {
+      return res.status(400).json({ error: "No file uploaded or URL missing" });
+    }
 
+    res.status(200).json({ url: req.file.path }); // ✅ This should be the Cloudinary URL
+  } catch (err) {
+    console.error("Upload error:", err);
+    res.status(500).json({ error: "Failed to upload file" });
+  }
+});
 module.exports = router;
 
 

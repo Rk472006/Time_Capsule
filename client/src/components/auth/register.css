@@ -1,94 +1,91 @@
-/* register.css */
+
+.register-page {
+  height: 100vh;
+  background: linear-gradient(135deg, #f0f4ff, #e2e8f0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 
 .register-container {
-  max-width: 360px;
-  margin: 0 auto;
-  padding: 0.5rem 1.5rem;
-  background-color: white;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
 }
 
-.register-title {
+.register-container h2 {
   font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #333;
+  color: #3b82f6;
+  margin-bottom: 24px;
 }
 
-.register-form {
+/* Form styling */
+#register {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  gap: 1rem;
+  gap: 16px;
 }
 
-.register-form input {
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  
+/* Input fields */
+#register input {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
   border-radius: 8px;
-  transition: border-color 0.3s ease;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.register-form input:focus {
+  font-size: 1rem;
   outline: none;
-  border-color: #646cff;
-  box-shadow: 0 0 6px #646cff66;
+  transition: border-color 0.2s ease;
 }
 
-.register-form button {
-  padding: 0.75rem 1rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  background-color: #646cff;
+#register input:focus {
+  border-color: #3b82f6;
+}
+
+/* Submit button */
+#register button {
+  padding: 12px;
+  background-color: #3b82f6;
   color: white;
+  font-size: 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 100%;
-  box-sizing: border-box;
 }
 
-.register-form button:hover:not(:disabled) {
-  background-color: #535bf2;
+#register button:hover {
+  background-color: #2563eb;
 }
 
-.register-form button:disabled {
-  background-color: #a3a3ff;
-  cursor: not-allowed;
+/* Login link */
+#register p {
+  font-size: 0.95rem;
+  margin-top: 16px;
+  color: #475569;
 }
 
-.message {
-  margin-top: 1rem;
-  font-size: 1rem;
-  text-align: center;
+#register p a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.message.success {
-  color: #22c55e; 
+#register p a:hover {
+  text-decoration: underline;
 }
 
-.message.error {
-  color: #ef4444; 
-}
-
-
-@media (max-width: 400px) {
+/* Responsive for small devices */
+@media (max-width: 480px) {
   .register-container {
-    padding: 1rem 1rem;
+    padding: 30px 20px;
   }
-  .register-title {
+
+  .register-container h2 {
     font-size: 1.75rem;
-  }
-  .register-form input,
-  .register-form button {
-    font-size: 0.95rem;
-    padding: 0.65rem 1rem;
   }
 }

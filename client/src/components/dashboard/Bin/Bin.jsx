@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./bin.css";
-
-export default function Bin({ uid }) {
+import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
+import Navbar from "../layouts/Navbar"; 
+import Bin_Msg from "./Bin_Msg"; 
+export default function Bin({  }) {
+  const uid =useParams().uid; 
   const [messages, setMessages] = useState([]);
 
   const fetchMessages = async () => {
@@ -12,6 +16,7 @@ export default function Bin({ uid }) {
       setMessages(res.data);
     } catch (err) {
       console.error("Error fetching bin messages:", err);
+      toast.error("Error fetching bin messages:", err);
     }
   };
 
@@ -28,7 +33,7 @@ export default function Bin({ uid }) {
       setMessages((prev) => prev.filter(msg => msg._id !== id));
     } catch (err) {
       console.error("Restore failed:", err);
-      alert("Failed to restore message.");
+      toast.error("Failed to restore message.");
     }
   };
 
@@ -39,38 +44,28 @@ export default function Bin({ uid }) {
       setMessages((prev) => prev.filter(msg => msg._id !== id));
     } catch (err) {
       console.error("Permanent delete failed:", err);
-      alert("Failed to permanently delete message.");
+      toast.error("Failed to permanently delete message.");
     }
   };
 
   return (
   <div className="bin-container">
+    <Navbar uid={uid}/>
+    <div className="bin-page">
     <h3>Bin</h3>
     {messages.length === 0 ? (
       <p>No deleted messages found.</p>
     ) : (
       messages.map((msg) => (
-        <div key={msg._id} className="message-card">
-          <p><strong>From:</strong> {msg.senderEmail}</p>
-          <p>{msg.content}</p>
-          <p><small>Opened on: {new Date(msg.openTime).toLocaleString()}</small></p>
-          <div className="button-group">
-            <button
-              onClick={() => handleRestore(msg._id)}
-              className="button-restore"
-            >
-              Restore
-            </button>
-            <button
-              onClick={() => handlePermanentDelete(msg._id)}
-              className="button-delete"
-            >
-              Delete Permanently
-            </button>
-          </div>
-        </div>
+         <Bin_Msg
+          key={msg._id}
+          msg={msg}
+          handleRestore={handleRestore}
+          handlePermanentDelete={handlePermanentDelete}
+        />
       ))
     )}
+    </div>
   </div>
 );
 
