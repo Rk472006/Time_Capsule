@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import Navbar from "../layouts/Navbar";
 import { useParams } from "react-router-dom";
 import dayjs from 'dayjs';
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
 export default function Create() {
   const uid = useParams().uid;
   const [to, setTo] = useState("");
@@ -69,12 +71,12 @@ export default function Create() {
       if (!recipientUID) return;
 
       const uploadedImageUrl = await uploadImageToCloudinary();
-      const utc = dayjs(openAt).utc().toISOString();
+      const utcTime = dayjs(openAt).utc().toISOString();
       await axios.post(`${import.meta.env.VITE_EXPRESS_API}/api/messages/create`, {
         from: uid,
         to: recipientUID,
         content,
-        openAt: utc, 
+        openAt: utcTime, 
         imageUrl: uploadedImageUrl,
       });
 
