@@ -4,7 +4,7 @@ import { auth } from "../../utils/firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import "./Login.css"; 
+import "./login.css"; 
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
