@@ -25,8 +25,7 @@ export default function Inbox() {
     if (user) {
       const currentUid = user.uid;   
       console.log(currentUid);     
-      setUid(currentUid);                   
-      fetchMessages(currentUid);         
+      setUid(currentUid);        
     } else {
       setUid(null);
       setMessages([]);                      
