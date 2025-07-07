@@ -7,9 +7,12 @@ import Navbar from "../layouts/Navbar";
 import { useParams } from "react-router-dom";
 import dayjs from 'dayjs';
 import utc from "dayjs/plugin/utc";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../utils/firebase"; // Adjust path
+
 dayjs.extend(utc);
 export default function Create() {
-  const uid = useParams().uid;
+   const [uid, setUid] = useState(null);
   const [to, setTo] = useState("");
   const [content, setContent] = useState("");
   const [openAt, setOpenAt] = useState("");
@@ -21,7 +24,17 @@ export default function Create() {
   const local = new Date(localDateTimeStr);
   return new Date(local.getTime() - local.getTimezoneOffset() * 60000).toISOString();
 };
+   useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUid(user.uid);
+      } else {
+        toast.error("You must be logged in to schedule messages.");
+      }
+    });
 
+    return () => unsubscribe();
+  }, []);
   const getUIDByEmail = async (email) => {
     try {
       const response = await axios.post(

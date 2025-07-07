@@ -6,9 +6,11 @@ import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import Navbar from "../layouts/Navbar";
 import Sent_Msg from "./Sent_Msg";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../utils/firebase";
 
 export default function Sent() {
-  const uid = useParams().uid;
+  const [uid, setUid] = useState(null);
   const [messages, setMessages] = useState([]);
   const [now, setNow] = useState(new Date());
   const [reload, setReload] = useState(false);
@@ -22,6 +24,20 @@ export default function Sent() {
   const [endDate, setEndDate] = useState("");
   const [openTimeFilter, setOpenTimeFilter] = useState("");
   const [isOpened, setIsOpened] = useState("all");
+  useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const currentUid = user.uid;
+      setUid(currentUid);
+      console.log("User UID:", currentUid);  
+    } else {
+      toast.error("Authentication required to sent messages.");
+      setUid(null);
+    }
+  });
+
+  return () => unsubscribe();
+}, []);
 
   useEffect(() => {
     const interval = setInterval(() => setNow(new Date()), 10000);

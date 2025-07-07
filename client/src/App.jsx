@@ -15,10 +15,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/inbox/:uid" element={<ProtectedRoute><Inbox /></ProtectedRoute>} />
-        <Route path="/sent/:uid" element={<ProtectedRoute><Sent /></ProtectedRoute>} />
-        <Route path="/create/:uid" element={<ProtectedRoute><Create /></ProtectedRoute>} />
-        <Route path="/bin/:uid" element={<ProtectedRoute><Bin /></ProtectedRoute>} />
+        <Route path="/inbox" element={<ProtectedRoute><Inbox /></ProtectedRoute>} />
+        <Route path="/sent" element={<ProtectedRoute><Sent /></ProtectedRoute>} />
+        <Route path="/create" element={<ProtectedRoute><Create /></ProtectedRoute>} />
+        <Route path="/bin" element={<ProtectedRoute><Bin /></ProtectedRoute>} />
       </Routes>
   
   );

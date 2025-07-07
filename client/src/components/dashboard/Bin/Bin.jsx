@@ -5,10 +5,28 @@ import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import Navbar from "../layouts/Navbar"; 
 import Bin_Msg from "./Bin_Msg"; 
-export default function Bin({  }) {
-  const uid =useParams().uid; 
-  const [messages, setMessages] = useState([]);
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../utils/firebase";  
 
+export default function Bin({  }) {
+   const [uid, setUid] = useState(null);
+  const [messages, setMessages] = useState([]);
+    useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const currentUid = user.uid;
+        setUid(currentUid);
+        fetchMessages(currentUid); 
+        console.log(currentUid);
+      } else {
+        toast.error("You must be logged in to view the Bin.");
+        setUid(null);
+        setMessages([]);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
   const fetchMessages = async () => {
     try {
       
@@ -21,10 +39,9 @@ export default function Bin({  }) {
   };
 
   useEffect(() => {
-    //console.log(uid);
+    
     if (uid) fetchMessages();
-   // const interval = setInterval(fetchMessages, 15000); // auto-refresh every 15 seconds
-   // return () => clearInterval(interval); // cleanup on unmount
+   
   }, [uid]);
 
   const handleRestore = async (id) => {
@@ -52,7 +69,7 @@ export default function Bin({  }) {
   <div className="bin-container">
     <Navbar uid={uid}/>
     <div className="bin-page">
-    <h3>Bin</h3>
+    <h3>🗑️ Bin</h3>
     {messages.length === 0 ? (
       <p>No deleted messages found.</p>
     ) : (

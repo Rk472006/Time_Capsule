@@ -38,15 +38,15 @@ export default function Register() {
       );
 
       const firebaseUser = userCredential.user;
-      console.log(API);
+      
       await axios.post(`${API}/api/user/register`, {
         uid: firebaseUser.uid,
         email: firebaseUser.email,
       });
 
       toast.success("Registered successfully!");
-      localStorage.setItem("uid", firebaseUser.uid);
-      navigate(`/inbox/${firebaseUser.uid}`, { replace: true });
+      
+      navigate("/inbox");
     } catch (err) {
       console.error("Register failed:", err);
       toast.error("Registration failed.");

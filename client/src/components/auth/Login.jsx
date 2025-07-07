@@ -4,7 +4,7 @@ import { auth } from "../../utils/firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import "./login.css"; 
+import "./Login.css"; 
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -35,8 +35,8 @@ export default function Login() {
       const firebaseUser = userCredential.user;
 
       toast.success("Logged in successfully!");
-      localStorage.setItem("uid", firebaseUser.uid);
-      navigate(`/inbox/${firebaseUser.uid}`, { replace: true });
+      
+      navigate("/inbox");
     } catch (err) {
       console.error("Login failed:", err);
       if (err.code === 'auth/user-not-found') {

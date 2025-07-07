@@ -7,9 +7,10 @@ import toast from "react-hot-toast";
 import Navbar from "../layouts/Navbar.jsx"; 
 import { useParams } from "react-router-dom";
 import Inbox_Msg from "./Inbox_Msg.jsx";
-
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../utils/firebase"; 
 export default function Inbox() {
-  const { uid } = useParams();
+   const [uid, setUid] = useState(null);
   const [messages, setMessages] = useState([]);
   const [filters, setFilters] = useState({
     search: "",
@@ -19,6 +20,23 @@ export default function Inbox() {
     includeDeleted: false,
   });
   const [viewingImageUrl, setViewingImageUrl] = useState(null);
+  useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const currentUid = user.uid;   
+      console.log(currentUid);     
+      setUid(currentUid);                   
+      fetchMessages(currentUid);         
+    } else {
+      setUid(null);
+      setMessages([]);                      
+      toast.error("You must be logged in to access the inbox.");
+    }
+  });
+
+  return () => unsubscribe();
+}, []);   
+
   const fetchMessages = async () => {
     try {
       const params = new URLSearchParams();
