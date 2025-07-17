@@ -29,14 +29,14 @@
 
 ---
 
-## 📂 Folder Structure
-ime_Capsule/
-├── client/ # React frontend
-│ ├── components/ # Reusable components
-│ ├── pages/ # Routing pages (Inbox, Bin, Login, etc.)
-│ └── utils/ 
-├── server/ # Node + Express backend
-│ ├── models/ # Mongoose schemas
-│ ├── routes/ # Capsule, Auth, Image APIs
-│ └── middleware/
+Time_Capsule/
+├── client/                  # React frontend
+│   ├── components/          # Reusable UI components
+│   ├── pages/               # Routing pages (Inbox, Bin, Login, etc.)
+│   └── utils/               
+├── server/                  # Node + Express backend
+│   ├── middleware/          # Authentication 
+│   ├── models/              # Mongoose schemas for capsules and users
+│   └── routes/              # API endpoints for Capsule, Auth, Images
 └── README.md
+
