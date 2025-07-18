@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 
-// Register or login user by UID
+
 router.post("/register", async (req, res) => {
   const { uid, email } = req.body;
   try {
@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Find UID by email
+
 router.post("/getUIDByEmail", async (req, res) => {
   const { email } = req.body;
 

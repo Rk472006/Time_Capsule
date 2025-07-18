@@ -1,4 +1,4 @@
-/* Wrapper for the entire login page */
+
 .login-page {
   height: 100vh;
   background: linear-gradient(135deg, #f0f4ff, #e2e8f0);
@@ -8,7 +8,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Main container for the login form */
+
 .login-container {
   background: white;
   padding: 40px 30px;
@@ -19,21 +19,21 @@
   text-align: center;
 }
 
-/* Heading */
+
 .login-container h2 {
   font-size: 2rem;
   color: #3b82f6;
   margin-bottom: 24px;
 }
 
-/* Form styling */
+
 #login {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* Input fields */
+
 #login input {
   padding: 12px;
   border: 1px solid #cbd5e1;
@@ -47,7 +47,7 @@
   border-color: #3b82f6;
 }
 
-/* Submit button */
+
 #login button {
   padding: 12px;
   background-color: #3b82f6;
@@ -63,7 +63,7 @@
   background-color: #2563eb;
 }
 
-/* Register link */
+
 #login p {
   font-size: 0.95rem;
   margin-top: 16px;
@@ -80,7 +80,7 @@
   text-decoration: underline;
 }
 
-/* Responsive for small devices */
+
 @media (max-width: 480px) {
   .login-container {
     padding: 30px 20px;

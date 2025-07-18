@@ -1,4 +1,4 @@
-/* Root wrapper */
+
 .home-page {
   margin: 0;
   padding: 0;
@@ -10,7 +10,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Main content box */
+
 .app-container {
   background-color: #ffffff;
   padding: 40px 30px;
@@ -21,21 +21,21 @@
   max-width: 500px;
 }
 
-/* Title styling */
+
 .title {
   font-size: 2.5rem;
   color: #3b82f6;
   margin-bottom: 12px;
 }
 
-/* Subtitle */
+
 .subtitle {
   font-size: 1.1rem;
   color: #475569;
   margin-bottom: 30px;
 }
 
-/* Buttons */
+
 .button-container {
   display: flex;
   justify-content: center;
@@ -58,7 +58,7 @@
   background-color: #2563eb;
 }
 
-/* Responsive Design */
+
 @media (max-width: 480px) {
   .title {
     font-size: 2rem;

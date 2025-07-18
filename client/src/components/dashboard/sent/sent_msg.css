@@ -1,4 +1,4 @@
-/* Message Card */
+
 .sent-card {
   background-color: #ffffff;
   border: 1px solid #e5e7eb;
@@ -40,7 +40,7 @@
   background-color: #f9fafb;
 }
 
-/* Status Label */
+
 .status {
   font-size: 0.85rem;
   font-weight: bold;
@@ -55,7 +55,7 @@
   color: orange;
 }
 
-/* Buttons */
+
 .btn {
   padding: 6px 12px;
   margin: 8px 8px 0 0;
@@ -102,7 +102,7 @@
   font-style: italic;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .sent-page {
     padding: 1rem;
@@ -121,8 +121,7 @@
   }
 }
 
-/* Image Modal Popup */
-/* Image Modal Overlay */
+
 .image-modal {
   position: fixed;
   top: 0;
@@ -137,7 +136,7 @@
   padding: 1rem;
 }
 
-/* Modal Content Box */
+
 .image-modal-content {
   position: relative;
   background: #ffffff;
@@ -152,7 +151,7 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Modal Image */
+
 .image-modal-content img {
   max-width: 100%;
   max-height: 70vh;
@@ -160,7 +159,7 @@
   border-radius: 8px;
 }
 
-/* Close Button */
+
 .image-close {
   position: absolute;
   top: 5px;
@@ -185,7 +184,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Fade Animation */
+
 @keyframes fadeIn {
   from {
     opacity: 0;

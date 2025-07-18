@@ -1,4 +1,4 @@
-/* navbar.css */
+
 .navbar {
   display: flex;
   align-items: center;
@@ -27,7 +27,7 @@
   display: none;
 }
 
-/* Menu */
+
 .navbar-menu {
   display: flex;
   gap: 1rem;
@@ -47,9 +47,7 @@
   border-radius: 5px;
 }
 
-/* ----------------------------- */
-/* Mobile Styles */
-/* ----------------------------- */
+
 @media (max-width: 768px) {
   .hamburger {
     display: block;

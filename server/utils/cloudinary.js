@@ -1,6 +1,6 @@
-// utils/cloudinary.js
+
 const cloudinary = require("cloudinary").v2;
-require("dotenv").config(); // make sure this is called once globally
+require("dotenv").config(); 
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,

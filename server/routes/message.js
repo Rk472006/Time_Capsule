@@ -7,7 +7,7 @@ const upload = require("../middleware/upload");
 router.post('/create', async (req, res) => {
   const { from, to, content, openAt,imageUrl } = req.body;
 
-  // Validate required fields
+  
   if (!from || !to || !content || !openAt) {
     return res.status(400).json({ error: 'All fields are required' });
   }
@@ -41,7 +41,7 @@ router.patch('/messages/open/:id', async (req, res) => {
   }
 });
 
-// GET /api/messages/inbox/:uid
+
 const User = require('../models/User');
 
 router.get('/inbox/:uid', async (req, res) => {
@@ -49,7 +49,7 @@ router.get('/inbox/:uid', async (req, res) => {
     const now = new Date();
     const { search, startDate, endDate, isOpened, includeDeleted } = req.query;
 
-    // Step 1: Base filter
+    
     const filter = {
       to: req.params.uid,
       openTime: { $lte: now },
@@ -79,10 +79,10 @@ router.get('/inbox/:uid', async (req, res) => {
       filter.isOpened = false;
     }
 
-    // Step 2: Get messages
-    const messages = await Message.find(filter).lean(); // use .lean() for plain JS objects
+    
+    const messages = await Message.find(filter).lean(); 
 
-    // Step 3: Extract all user UIDs (sender + reactions)
+    
     const fromUids = messages.map(msg => msg.from);
     const reactionUids = [];
 
@@ -94,14 +94,14 @@ router.get('/inbox/:uid', async (req, res) => {
 
     const uniqueUids = [...new Set([...fromUids, ...reactionUids])];
 
-    // Step 4: Fetch user emails
+    
     const users = await User.find({ uid: { $in: uniqueUids } }, 'uid email');
     const uidToEmail = {};
     users.forEach(user => {
       uidToEmail[user.uid] = user.email;
     });
 
-    // Step 5: Enrich messages
+    
     const enrichedMessages = messages.map(msg => {
       const enrichedReactions = {};
       for (const [emoji, ids] of Object.entries(msg.reactions || {})) {
@@ -122,10 +122,7 @@ router.get('/inbox/:uid', async (req, res) => {
   }
 });
 
-// GET /api/messages/sent/:uid
-//const User = require('../models/User'); // Make sure this is at the top
 
-// GET /api/messages/sent/:uid
 router.get('/sent/:uid', async (req, res) => {
   try {
     const { search, startDate, endDate, openTime, isOpened } = req.query;
@@ -154,7 +151,7 @@ router.get('/sent/:uid', async (req, res) => {
 
     const messages = await Message.find(filter).lean();
 
-    // Step 1: Extract all relevant UIDs (to + reactions)
+    
     const toUids = messages.map(msg => msg.to);
     const reactionUids = [];
     messages.forEach(msg => {
@@ -164,14 +161,14 @@ router.get('/sent/:uid', async (req, res) => {
     });
     const allUids = [...new Set([...toUids, ...reactionUids])];
 
-    // Step 2: Fetch all user emails
+    
     const users = await User.find({ uid: { $in: allUids } }, 'uid email');
     const uidToEmailMap = {};
     users.forEach(user => {
       uidToEmailMap[user.uid] = user.email;
     });
 
-    // Step 3: Enrich messages
+    
     const enrichedMessages = messages.map(msg => {
       const enrichedReactions = {};
       for (const [emoji, ids] of Object.entries(msg.reactions || {})) {
@@ -222,7 +219,7 @@ router.patch('/open/:id', async (req, res) => {
 });
 
 
-// Soft delete (move to bin)
+
 router.patch('/inbox/delete/:id', async (req, res) => {
   try {
     const updated = await Message.findByIdAndUpdate(req.params.id, { deletedFromInbox: true },{new:true});
@@ -238,31 +235,31 @@ if (!updated) {
   }
 });
 
-// Get bin messages
+
 router.get('/bin/:uid', async (req, res) => {
   try {
     const now = new Date();
 
-    // Step 1: Fetch soft-deleted messages where openTime has passed
+  
     const messages = await Message.find({
       to: req.params.uid,
       openTime: { $lte: now },
       deletedFromInbox: true,
     });
 
-    // Step 2: Extract unique sender UIDs
+    
     const fromUids = [...new Set(messages.map(msg => msg.from))];
 
-    // Step 3: Fetch corresponding user info
+    
     const users = await User.find({ uid: { $in: fromUids } });
 
-    // Step 4: Map uid to email
+  
     const uidToEmail = {};
     users.forEach(user => {
       uidToEmail[user.uid] = user.email;
     });
 
-    // Step 5: Enrich each message with sender email
+    
     const enrichedMessages = messages.map(msg => ({
       ...msg._doc,
       senderEmail: uidToEmail[msg.from] || "Unknown",
@@ -296,7 +293,7 @@ router.patch('/restore/:id', async (req, res) => {
   }
 });
 
-// ✅ Permanently delete message
+
 router.delete('/permanent/:id', async (req, res) => {
   try {
     const deleted = await Message.findByIdAndDelete(req.params.id);
@@ -322,7 +319,7 @@ router.patch('/update/:id', async (req, res) => {
     res.status(500).json({ error: 'Update failed' });
   }
 });
-// POST /api/messages/:id/react
+
 router.post('/:id/react', async (req, res) => {
   const { emoji, userId } = req.body;
 
@@ -335,10 +332,10 @@ router.post('/:id/react', async (req, res) => {
 
   const reacted = message.reactions.get(emoji);
   if (reacted.includes(userId)) {
-    // toggle: remove
+    
     message.reactions.set(emoji, reacted.filter(uid => uid !== userId));
   } else {
-    // add
+
     message.reactions.set(emoji, [...reacted, userId]);
   }
 
@@ -351,7 +348,7 @@ router.post("/upload", upload.single("file"), (req, res) => {
       return res.status(400).json({ error: "No file uploaded or URL missing" });
     }
 
-    res.status(200).json({ url: req.file.path }); // ✅ This should be the Cloudinary URL
+    res.status(200).json({ url: req.file.path }); 
   } catch (err) {
     console.error("Upload error:", err);
     res.status(500).json({ error: "Failed to upload file" });

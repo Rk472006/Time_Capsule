@@ -25,14 +25,14 @@
   margin-bottom: 24px;
 }
 
-/* Form styling */
+
 #register {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* Input fields */
+
 #register input {
   padding: 12px;
   border: 1px solid #cbd5e1;
@@ -46,7 +46,7 @@
   border-color: #3b82f6;
 }
 
-/* Submit button */
+
 #register button {
   padding: 12px;
   background-color: #3b82f6;
@@ -62,7 +62,7 @@
   background-color: #2563eb;
 }
 
-/* Login link */
+
 #register p {
   font-size: 0.95rem;
   margin-top: 16px;
@@ -79,7 +79,7 @@
   text-decoration: underline;
 }
 
-/* Responsive for small devices */
+
 @media (max-width: 480px) {
   .register-container {
     padding: 30px 20px;

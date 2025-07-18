@@ -1,5 +1,5 @@
 import React from 'react';
-import './bin_msg.css'; // Assuming you have a CSS file for styling
+import './bin_msg.css'; 
 export default function Bin_Msg({ msg, handleRestore, handlePermanentDelete }) {
   return (
     <div key={msg._id} className="message-card">

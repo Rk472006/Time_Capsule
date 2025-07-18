@@ -1,4 +1,4 @@
-// src/utils/firebaseErrors.js
+
 
 export const getFirebaseAuthErrorMessage = (errorCode) => {
   switch (errorCode) {
